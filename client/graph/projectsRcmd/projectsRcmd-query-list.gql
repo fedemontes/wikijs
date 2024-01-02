@@ -1,0 +1,15 @@
+query ($sector: String, $trabajo: String, $perfil_alumnado: String ){
+  projectsRcmds {
+    list (sector: $sector, trabajo: $trabajo, perfil_alumnado: $perfil_alumnado) {
+      id
+      title
+      content 
+      createdAt
+      updatedAt
+      authorId 
+      authorName
+      arguments
+      isnew
+    }
+  }
+}

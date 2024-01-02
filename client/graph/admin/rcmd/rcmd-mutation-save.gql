@@ -1,0 +1,12 @@
+mutation($credits: String!, $spreadSheetId: String!, $jwt:String!, $url: String!) {
+   rcmd  {
+    setConfig(credits: $credits, spreadSheetId: $spreadSheetId, jwt: $jwt, url: $url ) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}

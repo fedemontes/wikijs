@@ -1,0 +1,10 @@
+query {
+  rcmd {
+    config {
+      credits
+      spreadSheetId
+      jwt
+      url
+    }
+  }
+}

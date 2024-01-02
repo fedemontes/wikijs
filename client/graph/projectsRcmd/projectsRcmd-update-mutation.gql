@@ -1,0 +1,13 @@
+mutation($id: Int!, $title: String!, $content: String!, $updatedAt: Date!, $isnew: Boolean) {
+  projectsRcmds {
+    update(id: $id, title: $title, content: $content, updatedAt: $updatedAt, isnew: $isnew) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+  }
+ }
+}
+

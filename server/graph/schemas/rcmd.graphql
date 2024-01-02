@@ -1,0 +1,44 @@
+# ===============================================
+# RCMD 
+# ===============================================
+
+extend type Query {
+  rcmd: rcmdQuery
+}
+
+extend type Mutation {
+  rcmd: rcmdMutation
+}
+
+# -----------------------------------------------
+# QUERIES
+# -----------------------------------------------
+
+type rcmdQuery {
+  config: rcmdConfig @auth(requires: ["manage:projectsAI", "manage:system"])
+}
+
+# -----------------------------------------------
+# MUTATIONS
+# -----------------------------------------------
+
+type rcmdMutation {
+  setConfig(
+    credits: String!
+    spreadSheetId: String!
+    jwt: String!
+    url: String!
+  ): DefaultResponse @auth(requires: ["manage:projectsAI", "manage:system"])
+}
+
+# -----------------------------------------------
+# TYPES
+# -----------------------------------------------
+
+type rcmdConfig {
+  credits: String!
+  spreadSheetId: String!
+  jwt: String!
+  url: String!
+}
+

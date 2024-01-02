@@ -1,0 +1,13 @@
+mutation ($id: Int!) {
+    projectsRcmds {
+       delete(id: $id) {
+          responseResult {
+            succeeded
+            errorCode
+            slug
+             message
+          }
+      }
+   }
+}
+

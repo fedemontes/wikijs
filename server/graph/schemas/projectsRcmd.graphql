@@ -1,0 +1,121 @@
+# ===============================================
+# PROJECTSRCMD
+# ===============================================
+
+extend type Query {
+  projectsRcmds: projectsRcmdQuery
+}
+
+extend type Mutation {
+  projectsRcmds: projectsRcmdMutation
+}
+# -----------------------------------------------
+# QUERIES
+# -----------------------------------------------
+
+type projectsRcmdQuery {
+
+  single(
+    id: Int!
+  ): projectsRcmd @auth(requires: ["read:pages", "manage:system"])
+
+  list(
+    sector: String
+    trabajo: String
+    perfil_alumnado: String
+    orderBy: projectsRcmdOrderBy
+  ): [projectsRcmd]! @auth(requires: ["manage:system", "read:pages"])
+
+
+#  search(
+#    query: String!
+#  ): projectsRcmdSearchResponse! @auth(requires: ["manage:system", "read:pages"])
+
+#  delete(
+#    id: Int!
+#  ): DefaultResponse @auth(requires: ["delete:pages", "manage:system"])
+
+}
+
+# -----------------------------------------------
+# MUTATIONS
+# -----------------------------------------------
+
+type projectsRcmdMutation {
+  create(
+  id: Int!
+  title: String!
+  content: String!
+  updatedAt: Date!
+  isnew: Boolean 
+  ): projectsRcmdResponse @auth(requires: ["write:pages", "manage:pages", "manage:system"])
+
+  update(
+  id: Int!
+  title: String!
+  content: String!
+  updatedAt: Date!
+  isnew: Boolean 
+  ): projectsRcmdResponse @auth(requires: ["write:pages", "manage:pages", "manage:system"])
+
+  delete(
+    id: Int!
+  ): DefaultResponse @auth(requires: ["delete:pages", "manage:system"])
+
+
+
+}
+# -----------------------------------------------
+# TYPES
+# -----------------------------------------------
+#
+
+type projectsRcmdResponse {
+  responseResult: ResponseStatus!
+  projectsRcmd: projectsRcmd 
+}
+
+type projectsRcmd {
+  id: Int!
+  title: String!
+  content: String!
+  createdAt: Date!
+  updatedAt: Date!
+  authorId: Int! @auth(requires: ["write:pages", "manage:system"])
+  authorName: String! @auth(requires: ["write:pages", "manage:system"])
+  authorEmail: String!
+  arguments: JSON 
+  isnew: Boolean 
+}
+
+type projectsRcmdListItem {
+  id: Int!
+  title: String
+  content: String
+  createdAt: Date!
+  updatedAt: Date!
+  authorId: Int! @auth(requires: ["write:pages", "manage:system"])
+  authorName: String! @auth(requires: ["write:pages", "manage:system"])
+  authorEmail: String!
+  arguments: JSON 
+  isnew: Boolean 
+}
+
+enum projectsRcmdOrderBy {
+  UPDATED
+  CREATED
+}
+
+type projectsRcmdSearchResponse {
+  results: [projectsRcmdSearchResult]!
+  suggestions: [String]!
+  totalHits: Int!
+}
+
+type projectsRcmdSearchResult {
+  id: String!
+  title: String!
+  content: String!
+  arguments: String!
+}
+
