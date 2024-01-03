@@ -168,7 +168,7 @@ export default {
        .map(v => v.replaceAll('"', '""')) 
        .map(v => `"${v}"`)  
        .join(',') 
-    )
+    ).join('\n\r')
    },
    convertToCSV(data) {
        const headers = Object.keys(data[0]);
